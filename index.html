@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+  <title>Приглашение · Марина Кириллина</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f2efe8;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      color: #2c2b28;
+      line-height: 1.5;
+      padding: 1.5rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-image: 
+        radial-gradient(circle at 0% 20%, rgba(215, 210, 195, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 100% 80%, rgba(195, 180, 165, 0.12) 0%, transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(230, 225, 215, 0.1) 0%, transparent 70%);
+      transition: background 0.6s ease;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* ——— частицы ——— */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: rgba(180, 170, 155, 0.15);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+    @keyframes floatParticle {
+      0% { transform: translateY(100vh) rotate(0deg) scale(0); opacity: 0; }
+      10% { opacity: 1; }
+      90% { opacity: 1; }
+      100% { transform: translateY(-10vh) rotate(720deg) scale(1); opacity: 0; }
+    }
+
+    .card {
+      max-width: 1100px;
+      width: 100%;
+      background: rgba(250, 248, 242, 0.78);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 48px;
+      padding: 2.8rem 2.8rem 2.2rem;
+      box-shadow: 
+        0 20px 60px -16px rgba(120, 110, 95, 0.12),
+        0 0 0 1px rgba(200, 190, 175, 0.12),
+        inset 0 1px 0 rgba(255, 255, 245, 0.6);
+      transition: box-shadow 0.5s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: cardFloat 8s ease-in-out infinite;
+      position: relative;
+      z-index: 1;
+    }
+
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .card:hover {
+      box-shadow: 
+        0 30px 70px -18px rgba(100, 90, 75, 0.18),
+        0 0 0 1px rgba(180, 170, 155, 0.2),
+        inset 0 1px 0 rgba(255, 255, 245, 0.8);
+    }
+
+    /* ——— декоративные углы ——— */
+    .corner-decor {
+      position: absolute;
+      font-size: 1.6rem;
+      color: rgba(180, 170, 155, 0.12);
+      font-family: 'Inter', sans-serif;
+      pointer-events: none;
+      transition: all 0.6s ease;
+      font-weight: 300;
+    }
+    .corner-decor:hover {
+      color: rgba(180, 170, 155, 0.25);
+      transform: scale(1.1);
+    }
+    .corner-tl { top: 1.2rem; left: 1.8rem; }
+    .corner-tr { top: 1.2rem; right: 1.8rem; transform: scaleX(-1); }
+    .corner-bl { bottom: 1.2rem; left: 1.8rem; transform: scaleY(-1); }
+    .corner-br { bottom: 1.2rem; right: 1.8rem; transform: scale(-1, -1); }
+
+    /* ——— навигация ——— */
+    .tabs {
+      display: flex;
+      gap: 0.6rem;
+      margin-bottom: 2.8rem;
+      border-bottom: 1px solid rgba(160, 150, 135, 0.12);
+      padding-bottom: 0.85rem;
+      flex-wrap: wrap;
+      position: relative;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      font-family: 'Inter', sans-serif;
+      font-weight: 400;
+      font-size: 0.9rem;
+      padding: 0.5rem 1.6rem;
+      border-radius: 60px;
+      color: #6b665e;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      letter-spacing: 0.02em;
+      position: relative;
+      background: rgba(200, 190, 175, 0.0);
+    }
+
+    .tab-btn::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 50%;
+      width: 0;
+      height: 2px;
+      background: #c67a5c;
+      transition: all 0.4s ease;
+      transform: translateX(-50%);
+      border-radius: 4px;
+    }
+
+    .tab-btn:hover {
+      color: #3a3732;
+      background: rgba(200, 190, 175, 0.08);
+    }
+
+    .tab-btn.active {
+      background: #e8e1d6;
+      color: #2f2b26;
+      font-weight: 500;
+      box-shadow: 0 4px 14px -8px rgba(120, 110, 95, 0.15);
+    }
+
+    .tab-btn.active::after {
+      width: 50%;
+      background: #c67a5c;
+    }
+
+    /* ——— страницы ——— */
+    .page {
+      display: none;
+      animation: fadeSlide 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .page.active {
+      display: block;
+    }
+
+    @keyframes fadeSlide {
+      0% { opacity: 0; transform: translateY(18px) scale(0.97); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    /* ——— пригласительная ——— */
+    .invite-header {
+      margin-bottom: 2rem;
+      position: relative;
+    }
+
+    .invite-sub {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #b3aa9b;
+      margin-bottom: 0.3rem;
+      animation: fadeInText 1s ease 0.2s both;
+      font-weight: 400;
+    }
+
+    .invite-name {
+      font-family: 'Inter', sans-serif;
+      font-weight: 350;
+      font-size: 3.4rem;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin: 0.2rem 0 0.6rem;
+      color: #1a1917;
+      animation: fadeInText 1s ease 0.3s both;
+    }
+
+    .invite-name .first-name {
+      font-weight: 600;
+      background: linear-gradient(145deg, #8f7e6b, #4d443b);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .invite-name .last-name {
+      font-weight: 350;
+      color: #1a1917;
+      -webkit-text-fill-color: #1a1917;
+      background: none;
+    }
+    .invite-name .patronymic {
+      font-weight: 300;
+      color: #6b655c;
+      -webkit-text-fill-color: #6b655c;
+      background: none;
+      font-size: 0.7em;
+      display: inline-block;
+      margin-left: 0.15em;
+    }
+
+    .invite-detail {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem 3.5rem;
+      margin-top: 1.8rem;
+      padding: 1.5rem 0 0.8rem;
+      border-top: 1px solid rgba(160, 150, 135, 0.12);
+      animation: fadeInText 1s ease 0.5s both;
+    }
+
+    .detail-item {
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease, color 0.3s ease;
+      cursor: default;
+      position: relative;
+    }
+
+    .detail-item:hover {
+      transform: translateX(6px);
+    }
+    .detail-item:hover .detail-value {
+      color: #c67a5c;
+    }
+
+    .detail-label {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #b3aa9b;
+      margin-bottom: 0.2rem;
+      font-weight: 500;
+    }
+
+    .detail-value {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #1f1e1b;
+      letter-spacing: -0.01em;
+      transition: color 0.3s ease;
+    }
+
+    .detail-value .highlight {
+      color: #c67a5c;
+      font-weight: 600;
+    }
+
+    .invite-message {
+      margin-top: 2rem;
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: #4a4540;
+      max-width: 80%;
+      border-left: 2px solid #c67a5c;
+      padding-left: 1.5rem;
+      line-height: 1.7;
+      animation: fadeInText 1s ease 0.7s both;
+      transition: border-color 0.4s ease;
+    }
+    .invite-message:hover {
+      border-color: #b8a99a;
+    }
+
+    .invite-message small {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: #9b9387;
+      font-style: italic;
+    }
+
+    /* ——— гости ——— */
+    .guest-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+    }
+
+    .guest-item {
+      background: rgba(250, 248, 242, 0.5);
+      backdrop-filter: blur(2px);
+      padding: 0.7rem 1rem 0.7rem 0.8rem;
+      border-radius: 60px;
+      border: 1px solid rgba(180, 170, 155, 0.08);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 2px 8px -6px rgba(0,0,0,0.02);
+      animation: guestAppear 0.5s ease both;
+      animation-delay: calc(0.04s * var(--i, 1));
+      cursor: pointer;
+      position: relative;
+    }
+
+    .guest-item:hover {
+      background: rgba(250, 248, 242, 0.92);
+      border-color: rgba(198, 122, 92, 0.25);
+      transform: translateY(-4px) scale(1.02);
+      box-shadow: 0 12px 28px -14px rgba(198, 122, 92, 0.15);
+    }
+
+    .guest-item:active {
+      transform: scale(0.97);
+    }
+
+    .guest-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 40px;
+      background: #e8e1d6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #4b443b;
+      font-size: 0.85rem;
+      font-weight: 500;
+      flex-shrink: 0;
+      transition: all 0.4s ease;
+    }
+
+    .guest-item:hover .guest-avatar {
+      background: #c67a5c;
+      color: #fff;
+      transform: scale(1.08);
+    }
+
+    .guest-name {
+      font-weight: 400;
+      font-size: 0.95rem;
+      color: #1f1e1b;
+    }
+
+    .guest-status {
+      margin-left: auto;
+      font-size: 0.6rem;
+      background: #e8e1d6;
+      padding: 0.15rem 0.6rem;
+      border-radius: 30px;
+      color: #4d4640;
+      letter-spacing: 0.04em;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .guest-status.confirmed {
+      background: #d4ddd0;
+      color: #2d4030;
+    }
+
+    /* ——— меню ——— */
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 1.2rem;
+      margin-top: 1.8rem;
+    }
+
+    .menu-card {
+      background: rgba(250, 248, 242, 0.3);
+      backdrop-filter: blur(2px);
+      border-radius: 28px;
+      padding: 1.2rem 1.2rem 1.4rem;
+      border: 1px solid rgba(180, 170, 155, 0.06);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      animation: menuAppear 0.5s ease both;
+      animation-delay: calc(0.04s * var(--i, 1));
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .menu-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(198, 122, 92, 0.03), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      border-radius: 28px;
+    }
+
+    .menu-card:hover::before {
+      opacity: 1;
+    }
+
+    .menu-card:hover {
+      background: rgba(250, 248, 242, 0.8);
+      border-color: rgba(198, 122, 92, 0.15);
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 16px 32px -16px rgba(198, 122, 92, 0.1);
+    }
+
+    .menu-category {
+      font-size: 0.55rem;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #b3aa9b;
+      margin-bottom: 0.3rem;
+      transition: color 0.3s ease;
+      font-weight: 600;
+    }
+
+    .menu-card:hover .menu-category {
+      color: #c67a5c;
+    }
+
+    .menu-title {
+      font-size: 1.15rem;
+      font-weight: 500;
+      color: #1f1e1b;
+      margin-bottom: 0.15rem;
+    }
+
+    .menu-desc {
+      font-weight: 300;
+      font-size: 0.85rem;
+      color: #6b655c;
+      margin-top: 0.3rem;
+      border-top: 1px dashed rgba(160, 150, 135, 0.12);
+      padding-top: 0.3rem;
+    }
+
+    .menu-emoji {
+      font-size: 1.4rem;
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    /* ——— responsive ——— */
+    @media (max-width: 768px) {
+      body { padding: 0.8rem; }
+      .card { padding: 1.5rem 1.2rem 1.2rem; border-radius: 32px; }
+      .invite-name { font-size: 2.6rem; }
+      .invite-message { max-width: 100%; padding-left: 1rem; }
+      .guest-grid { grid-template-columns: 1fr 1fr; }
+      .menu-grid { grid-template-columns: 1fr 1fr; }
+      .tabs { gap: 0.3rem; }
+      .tab-btn { padding: 0.3rem 1rem; font-size: 0.8rem; }
+      .corner-decor { display: none; }
+    }
+    @media (max-width: 480px) {
+      .guest-grid { grid-template-columns: 1fr; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .invite-name { font-size: 2rem; }
+      .invite-detail { gap: 1rem 2rem; }
+      .detail-value { font-size: 1.1rem; }
+    }
+
+    /* ——— общие анимации ——— */
+    @keyframes fadeInText {
+      0% { opacity: 0; transform: translateY(12px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes guestAppear {
+      0% { opacity: 0; transform: scale(0.92) translateY(10px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    @keyframes menuAppear {
+      0% { opacity: 0; transform: scale(0.94) translateY(12px); }
+      100% { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .divider-light {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, #c67a5c, #d6cec0);
+      margin: 1.2rem 0 1.5rem;
+      border-radius: 4px;
+      transition: all 0.6s ease;
+    }
+    .divider-light:hover {
+      width: 120px;
+      background: linear-gradient(90deg, #c67a5c, #b8a99a);
+    }
+
+    .footer-note {
+      margin-top: 2.5rem;
+      font-size: 0.65rem;
+      color: #c2b9ab;
+      letter-spacing: 0.1em;
+      text-align: center;
+      border-top: 1px solid rgba(160, 150, 135, 0.08);
+      padding-top: 1.5rem;
+      transition: color 0.4s ease;
+    }
+    .footer-note:hover {
+      color: #a0988a;
+    }
+
+    .accent-dot {
+      display: inline-block;
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #c67a5c;
+      margin: 0 6px;
+      transition: all 0.4s ease;
+    }
+    .accent-dot:hover {
+      transform: scale(2);
+      background: #b05a3a;
+    }
+
+    /* таймер */
+    .timer {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1rem;
+      color: #c67a5c;
+      margin-top: 0.5rem;
+      padding: 0.3rem 1.2rem;
+      background: rgba(198, 122, 92, 0.06);
+      border-radius: 40px;
+      border: 1px solid rgba(198, 122, 92, 0.1);
+      font-weight: 400;
+    }
+    .timer span {
+      font-weight: 500;
+      min-width: 1.8rem;
+      text-align: center;
+    }
+    .timer .label {
+      font-size: 0.7rem;
+      color: #8a8276;
+      font-weight: 400;
+      margin-right: 0.2rem;
+    }
+
+    /* tooltip */
+    .guest-item .tooltip {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      background: #2c2b28;
+      color: #f7f5f0;
+      padding: 0.2rem 0.7rem;
+      border-radius: 12px;
+      font-size: 0.65rem;
+      white-space: nowrap;
+      font-weight: 400;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .guest-item:hover .tooltip {
+      display: block;
+      opacity: 1;
+    }
+
+    /* машина */
+    .car-info {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      font-size: 0.9rem;
+      color: #4a4540;
+      background: rgba(198, 122, 92, 0.05);
+      padding: 0.3rem 1.2rem;
+      border-radius: 40px;
+      border: 1px solid rgba(198, 122, 92, 0.08);
+      margin-top: 0.3rem;
+    }
+    .car-info .icon {
+      font-size: 1.1rem;
+    }
+    .car-info .time {
+      font-weight: 600;
+      color: #c67a5c;
+    }
+  </style>
+</head>
+<body>
+
+<!-- частицы -->
+<div class="particles" id="particles"></div>
+
+<div class="card">
+  <!-- декоративные углы -->
+  <div class="corner-decor corner-tl">❧</div>
+  <div class="corner-decor corner-tr">❧</div>
+  <div class="corner-decor corner-bl">❧</div>
+  <div class="corner-decor corner-br">❧</div>
+
+  <!-- навигация -->
+  <div class="tabs">
+    <button class="tab-btn active" data-page="invite">Приглашение</button>
+    <button class="tab-btn" data-page="guests">Гости</button>
+    <button class="tab-btn" data-page="menu">Меню</button>
+  </div>
+
+  <!-- СТРАНИЦА 1: ПРИГЛАШЕНИЕ -->
+  <div id="page-invite" class="page active">
+    <div class="invite-header">
+      <div class="invite-sub">✦ частное приглашение ✦</div>
+      <h1 class="invite-name">
+        <span class="last-name">Кириллина</span>
+        <span class="first-name">Марина</span>
+        <span class="patronymic">Анатольевна</span>
+      </h1>
+    </div>
+
+    <div class="invite-detail">
+      <div class="detail-item">
+        <span class="detail-label">Дата</span>
+        <span class="detail-value">4 <span class="highlight">июля</span> 2026</span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Сбор гостей</span>
+        <span class="detail-value"><span class="highlight">13:20</span></span>
+      </div>
+      <div class="detail-item">
+        <span class="detail-label">Локация</span>
+        <span class="detail-value">д. Протопоповка, Придорожная ул. 1</span>
+      </div>
+    </div>
+
+    <!-- машина -->
+    <div class="car-info">
+      <span class="icon">🚗</span>
+      Подача машины: <span class="time">13:20</span>
+      <span style="font-size:0.7rem; color:#b3aa9b; margin-left:0.2rem;">(встреча у дома)</span>
+    </div>
+
+    <div class="invite-message">
+      «Будем рады видеть вас в этот летний день.  
+      Тёплая атмосфера, лёгкие разговоры и вдохновение.»
+      <small>— Марина Анатольевна</small>
+    </div>
+
+    <div class="divider-light"></div>
+
+    <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.8rem 1.5rem;">
+      <div style="font-weight: 300; color: #6b655c; font-size: 0.9rem; letter-spacing: 0.02em; display: flex; align-items: center; gap: 4px;">
+        ✦  dress code:  свободный  <span class="accent-dot"></span>  ✦
+      </div>
+      <div class="timer" id="timer">
+        <span class="label">до события:</span>
+        <span id="timer-days">0</span>д
+        <span id="timer-hours">0</span>ч
+        <span id="timer-minutes">0</span>м
+        <span id="timer-seconds">0</span>с
+      </div>
+    </div>
+  </div>
+
+  <!-- СТРАНИЦА 2: ГОСТИ -->
+  <div id="page-guests" class="page">
+    <h2 style="font-weight: 350; font-size: 1.6rem; letter-spacing: -0.02em; color: #1a1917;">
+      Гости <span style="font-size:0.8rem; font-weight:300; color:#b3aa9b;">· 9 приглашённых</span>
+    </h2>
+    <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #c67a5c, #d6cec0); margin: 0.4rem 0 0.2rem; border-radius: 4px;"></div>
+    <p style="color: #8a8276; font-weight: 300; margin-bottom: 0.8rem; font-size:0.9rem;">
+      <span style="background: #d4ddd0; padding:0.1rem 0.7rem; border-radius:30px; color:#2d4030;">9 подтвердили</span>
+    </p>
+
+    <div class="guest-grid">
+      <div class="guest-item" style="--i:1"><span class="guest-avatar">А</span><span class="guest-name">Данил А.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 28.06</span></div>
+      <div class="guest-item" style="--i:2"><span class="guest-avatar">Е</span><span class="guest-name">Катя С.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 29.06</span></div>
+      <div class="guest-item" style="--i:3"><span class="guest-avatar">М</span><span class="guest-name">Полина Т.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 27.06</span></div>
+      <div class="guest-item" style="--i:4"><span class="guest-avatar">О</span><span class="guest-name">Лилия С.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 30.06</span></div>
+      <div class="guest-item" style="--i:5"><span class="guest-avatar">Д</span><span class="guest-name">Елизавета Н.</span><span class="guest-status confirmed">да</span><span class="tooltip">ожидается ответ</span></div>
+      <div class="guest-item" style="--i:6"><span class="guest-avatar">Н</span><span class="guest-name">Екатерина М.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 28.06</span></div>
+      <div class="guest-item" style="--i:7"><span class="guest-avatar">С</span><span class="guest-name">Варвара С.</span><span class="guest-status confirmed">да</span><span class="tooltip">ожидается ответ</span></div>
+      <div class="guest-item" style="--i:8"><span class="guest-avatar">И</span><span class="guest-name">Дарья М.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 29.06</span></div>
+      <div class="guest-item" style="--i:9"><span class="guest-avatar">В</span><span class="guest-name">Владислав Г.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 27.06</span></div>
+    </div>
+    <div style="margin-top: 1.5rem; font-size: 0.85rem; color: #b3aa9b; border-top: 1px solid #e6dfd6; padding-top: 1.2rem;">
+      ⚬  приглашение действительно для +1  ⚬  <span style="color:#c67a5c;">✦</span>
+    </div>
+  </div>
+
+  <!-- СТРАНИЦА 3: МЕНЮ -->
+  <div id="page-menu" class="page">
+    <h2 style="font-weight: 350; font-size: 1.6rem; letter-spacing: -0.02em; color: #1a1917;">
+      Меню <span style="font-size:0.8rem; font-weight:300; color:#b3aa9b;">· сезонное</span>
+    </h2>
+    <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #c67a5c, #d6cec0); margin: 0.4rem 0 0.2rem; border-radius: 4px;"></div>
+    <p style="color: #8a8276; font-weight: 300; margin-bottom: 0.5rem;">лёгкие закуски, основные блюда, десерты</p>
+
+    <div class="menu-grid">
+      <div class="menu-card" style="--i:1"><span class="menu-emoji">🐟</span><div class="menu-category">закуски</div><div class="menu-title">Татар из лосося</div><div class="menu-desc">авокадо, кунжут, соус понзу</div></div>
+      <div class="menu-card" style="--i:2"><span class="menu-emoji">🍅</span><div class="menu-category">закуски</div><div class="menu-title">Брускетта с томатами</div><div class="menu-desc">базилик, чеснок, оливковое масло</div></div>
+      <div class="menu-card" style="--i:3"><span class="menu-emoji">🍄</span><div class="menu-category">основное</div><div class="menu-title">Ризотто с белыми грибами</div><div class="menu-desc">пармезан, трюфельное масло</div></div>
+      <div class="menu-card" style="--i:4"><span class="menu-emoji">🥩</span><div class="menu-category">основное</div><div class="menu-title">Стейк из говядины</div><div class="menu-desc">томатный соус, розмарин</div></div>
+      <div class="menu-card" style="--i:5"><span class="menu-emoji">🍰</span><div class="menu-category">десерт</div><div class="menu-title">Тирамису</div><div class="menu-desc">классический, с маскарпоне</div></div>
+      <div class="menu-card" style="--i:6"><span class="menu-emoji">🍋</span><div class="menu-category">десерт</div><div class="menu-title">Лимонный тарт</div><div class="menu-desc">меренга, ягоды</div></div>
+      <div class="menu-card" style="--i:7"><span class="menu-emoji">🍹</span><div class="menu-category">напитки</div><div class="menu-title">Лимонад с мятой</div><div class="menu-desc">имбирь, лайм</div></div>
+      <div class="menu-card" style="--i:8"><span class="menu-emoji">🍒</span><div class="menu-category">напитки</div><div class="menu-title">Домашний компот</div><div class="menu-desc">сезонные ягоды</div></div>
+    </div>
+    <div style="margin-top: 1.5rem; font-size: 0.8rem; color: #b3aa9b; border-top: 1px solid #e6dfd6; padding-top: 1.2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap:0.5rem;">
+      <span>* вегетарианские опции доступны по запросу</span>
+      <span style="color:#c67a5c;">✦  приготовлено с любовью  ✦</span>
+    </div>
+  </div>
+
+  <div class="footer-note">
+    ✦  4 июля 13:20  ✦  <span class="accent-dot" style="display:inline-block; margin:0 4px;"></span>  ✦
+  </div>
+</div>
+
+<script>
+  (function() {
+    // ——— переключение вкладок ———
+    const tabs = document.querySelectorAll('.tab-btn');
+    const pages = {
+      invite: document.getElementById('page-invite'),
+      guests: document.getElementById('page-guests'),
+      menu: document.getElementById('page-menu')
+    };
+
+    function setActivePage(pageId) {
+      Object.values(pages).forEach(p => { if (p) p.classList.remove('active'); });
+      if (pages[pageId]) pages[pageId].classList.add('active');
+      tabs.forEach(btn => btn.classList.remove('active'));
+      tabs.forEach(btn => {
+        if (btn.dataset.page === pageId) btn.classList.add('active');
+      });
+      const activePage = pages[pageId];
+      if (activePage) {
+        activePage.style.animation = 'none';
+        requestAnimationFrame(() => { activePage.style.animation = ''; });
+      }
+    }
+
+    tabs.forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        const pageId = this.dataset.page;
+        if (pageId && pages[pageId]) setActivePage(pageId);
+      });
+    });
+
+    // ——— частицы ———
+    const particlesContainer = document.getElementById('particles');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 'particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.width = (2 + Math.random() * 4) + 'px';
+      p.style.height = p.style.width;
+      p.style.animationDuration = (15 + Math.random() * 25) + 's';
+      p.style.animationDelay = (Math.random() * 20) + 's';
+      p.style.opacity = 0.1 + Math.random() * 0.2;
+      particlesContainer.appendChild(p);
+    }
+
+    // ——— таймер до 4 июля 13:20 ———
+    function updateTimer() {
+      const target = new Date(2026, 6, 4, 13, 20, 0).getTime();
+      const now = new Date().getTime();
+      let diff = target - now;
+      if (diff < 0) diff = 0;
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById('timer-days').textContent = days;
+      document.getElementById('timer-hours').textContent = String(hours).padStart(2, '0');
+      document.getElementById('timer-minutes').textContent = String(minutes).padStart(2, '0');
+      document.getElementById('timer-seconds').textContent = String(seconds).padStart(2, '0');
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    // ——— акцентные точки мерцают ———
+    const dots = document.querySelectorAll('.accent-dot');
+    if (dots.length) {
+      setInterval(() => {
+        dots.forEach(dot => {
+          if (Math.random() > 0.8) {
+            dot.style.transform = 'scale(2.2)';
+            dot.style.background = '#b05a3a';
+            setTimeout(() => {
+              dot.style.transform = 'scale(1)';
+              dot.style.background = '#c67a5c';
+            }, 350);
+          }
+        });
+      }, 2000);
+    }
+
+    
+  })();
+</script>
+</body>
+</html>
