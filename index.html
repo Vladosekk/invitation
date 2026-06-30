@@ -733,35 +733,35 @@
     </div>
   </div>
 
-  <!-- СТРАНИЦА 3: ПРЕДПОЧТЕНИЯ -->
-  <div id="page-prefs" class="page">
-    <h2 style="font-weight: 350; font-size: 1.6rem; letter-spacing: -0.02em; color: #1a1917;">
-      Ваши предпочтения <span style="font-size:0.8rem; font-weight:300; color:#b3aa9b;">· еда и напитки</span>
-    </h2>
-    <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #c67a5c, #d6cec0); margin: 0.4rem 0 0.2rem; border-radius: 4px;"></div>
-    <p style="color: #8a8276; font-weight: 300; margin-bottom: 1.2rem; font-size:0.9rem;">
-      Расскажите, что вы любите или чего избегаете — мы учтём ваши пожелания.
-    </p>
+  <<!-- СТРАНИЦА 3: ПРЕДПОЧТЕНИЯ -->
+<div id="page-prefs" class="page">
+  <h2 style="font-weight: 350; font-size: 1.6rem; letter-spacing: -0.02em; color: #1a1917;">
+    Ваши предпочтения <span style="font-size:0.8rem; font-weight:300; color:#b3aa9b;">· еда и напитки</span>
+  </h2>
+  <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #c67a5c, #d6cec0); margin: 0.4rem 0 0.2rem; border-radius: 4px;"></div>
+  <p style="color: #8a8276; font-weight: 300; margin-bottom: 1.2rem; font-size:0.9rem;">
+    Расскажите, что вы любите или чего избегаете — мы учтём ваши пожелания.
+  </p>
 
-    <div class="prefs-wrapper">
-      <form id="prefsForm" action="#" method="POST">
-        <label for="prefsText" class="form-label">Ваши пожелания по еде и напиткам</label>
-        <textarea 
-          id="prefsText" 
-          name="prefs" 
-          placeholder="Например: не ем морепродукты, люблю вегетарианское, предпочитаю чай без сахара, аллергия на орехи… Пишите всё, что считаете важным."
-          required
-        ></textarea>
-        <div class="submit-row">
-          <button type="submit" class="btn-submit" id="submitPrefs">
-            <span>Отправить</span>
-            <span style="font-size:1.1rem;">✧</span>
-          </button>
-        </div>
-        <div id="statusMessage" class="msg-status"></div>
-      </form>
-    </div>
+  <div class="prefs-wrapper">
+    <form id="prefsForm" action="#" method="POST">
+      <label for="prefsText" class="form-label">Ваши пожелания по еде и напиткам</label>
+      <textarea 
+        id="prefsText" 
+        name="prefs" 
+        placeholder="Например: не ем морепродукты, люблю вегетарианское, предпочитаю чай без сахара, аллергия на орехи… Пишите всё, что считаете важным."
+        required
+      ></textarea>
+      <div class="submit-row">
+        <button type="submit" class="btn-submit" id="submitPrefs">
+          <span>Отправить</span>
+          <span style="font-size:1.1rem;">✧</span>
+        </button>
+      </div>
+      <div id="statusMessage" class="msg-status"></div>
+    </form>
   </div>
+</div>
 
   <div class="footer-note">
     ✦  минимализм · 4 июля 13:20  ✦  <span class="accent-dot" style="display:inline-block; margin:0 4px;"></span>  ✦
@@ -850,67 +850,74 @@
       }, 2000);
     }
 
-    // ——— ОТПРАВКА ФОРМЫ В TELEGRAM ———
-    const form = document.getElementById('prefsForm');
-    const textarea = document.getElementById('prefsText');
-    const statusMsg = document.getElementById('statusMessage');
-    const submitBtn = document.getElementById('submitPrefs');
+    // ——— ОТПРАВКА ЧЕРЕЗ ПРОКСИ ———
+  const form = document.getElementById('prefsForm');
+  const textarea = document.getElementById('prefsText');
+  const statusMsg = document.getElementById('statusMessage');
+  const submitBtn = document.getElementById('submitPrefs');
 
-    // ⚠️ ВАЖНО: замените токен и chat_id на свои!
-    const BOT_TOKEN = '8632676356:AAFxPO7RYnm_lN1sqMYY14kf2MkGqQrmX50';
-    const CHAT_ID = '584713791';
+  const BOT_TOKEN = '8632676356:AAFxPO7RYnm_lN1sqMYY14kf2MkGqQrmX50';
+  const CHAT_ID = '584713791';
 
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
+  // Прокси-сервер для обхода блокировок
+  const PROXY = 'https://api.telegram.org'; // Если не работает, замените на: 'https://cors-anywhere.herokuapp.com/https://api.telegram.org'
 
-      const text = textarea.value.trim();
-      if (!text) {
-        showStatus('Пожалуйста, напишите ваши пожелания.', 'info');
-        return;
-      }
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
 
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Отправка…';
-      showStatus('Отправляем ваши пожелания…', 'info');
-
-      try {
-        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
-        const payload = {
-          chat_id: CHAT_ID,
-          text: `🍽 *Новые предпочтения гостя:*\n\n${text}`,
-          parse_mode: 'Markdown'
-        };
-
-        const response = await fetch(url, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload)
-        });
-
-        const result = await response.json();
-
-        if (result.ok) {
-          showStatus('✅ Спасибо! Ваши пожелания успешно отправлены.', 'success');
-          textarea.value = '';
-        } else {
-          console.error('Telegram API error:', result);
-          showStatus('❌ Ошибка при отправке. Попробуйте позже или свяжитесь с организатором.', 'error');
-        }
-      } catch (error) {
-        console.error('Ошибка:', error);
-        showStatus('❌ Не удалось отправить. Проверьте интернет-соединение.', 'error');
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = '<span>Отправить</span><span style="font-size:1.1rem;">✧</span>';
-      }
-    });
-
-    function showStatus(message, type) {
-      statusMsg.textContent = message;
-      statusMsg.className = 'msg-status ' + type;
+    const text = textarea.value.trim();
+    if (!text) {
+      showStatus('Пожалуйста, напишите ваши пожелания.', 'info');
+      return;
     }
 
-  })();
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = 'Отправка…';
+    showStatus('Отправляем…', 'info');
+
+    try {
+      // Отправка через POST с дополнительными заголовками
+      const url = `${PROXY}/bot${BOT_TOKEN}/sendMessage`;
+      const payload = {
+        chat_id: CHAT_ID,
+        text: `🍽 *Предпочтения гостя:*\n\n${text}`,
+        parse_mode: 'Markdown'
+      };
+
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Origin': window.location.origin,
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+
+      if (result.ok) {
+        showStatus('✅ Спасибо! Пожелания отправлены.', 'success');
+        textarea.value = '';
+      } else {
+        console.error('Telegram API error:', result);
+        showStatus('❌ Ошибка: ' + (result.description || 'неизвестная ошибка'), 'error');
+      }
+    } catch (error) {
+      console.error('Ошибка:', error);
+      showStatus('❌ Не удалось отправить. Попробуйте другой способ (см. инструкцию ниже).', 'error');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = '<span>Отправить</span><span style="font-size:1.1rem;">✧</span>';
+    }
+  });
+
+  function showStatus(message, type) {
+    statusMsg.textContent = message;
+    statusMsg.className = 'msg-status ' + type;
+  }
+  }
+)
+();
 </script>
 </body>
 </html>
