@@ -382,119 +382,145 @@
       color: #2d4030;
     }
 
-    /* ——— меню ——— */
-    .menu-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
-      gap: 1.2rem;
-      margin-top: 1.8rem;
+    /* ——— предпочтения (форма) ——— */
+    .prefs-wrapper {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    .menu-card {
-      background: rgba(250, 248, 242, 0.3);
-      backdrop-filter: blur(2px);
-      border-radius: 28px;
-      padding: 1.2rem 1.2rem 1.4rem;
-      border: 1px solid rgba(180, 170, 155, 0.06);
-      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-      animation: menuAppear 0.5s ease both;
-      animation-delay: calc(0.04s * var(--i, 1));
-      cursor: default;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .menu-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: linear-gradient(135deg, rgba(198, 122, 92, 0.03), transparent 60%);
-      opacity: 0;
-      transition: opacity 0.4s ease;
-      border-radius: 28px;
-    }
-
-    .menu-card:hover::before {
-      opacity: 1;
-    }
-
-    .menu-card:hover {
-      background: rgba(250, 248, 242, 0.8);
-      border-color: rgba(198, 122, 92, 0.15);
-      transform: translateY(-5px) scale(1.01);
-      box-shadow: 0 16px 32px -16px rgba(198, 122, 92, 0.1);
-    }
-
-    .menu-category {
-      font-size: 0.55rem;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #b3aa9b;
-      margin-bottom: 0.3rem;
-      transition: color 0.3s ease;
-      font-weight: 600;
-    }
-
-    .menu-card:hover .menu-category {
-      color: #c67a5c;
-    }
-
-    .menu-title {
-      font-size: 1.15rem;
-      font-weight: 500;
-      color: #1f1e1b;
-      margin-bottom: 0.15rem;
-    }
-
-    .menu-desc {
-      font-weight: 300;
-      font-size: 0.85rem;
-      color: #6b655c;
-      margin-top: 0.3rem;
-      border-top: 1px dashed rgba(160, 150, 135, 0.12);
-      padding-top: 0.3rem;
-    }
-
-    .menu-emoji {
-      font-size: 1.4rem;
+    .prefs-wrapper .form-label {
       display: block;
-      margin-bottom: 0.2rem;
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: #4a4540;
+      margin-bottom: 0.5rem;
     }
 
-    /* ——— responsive ——— */
+    .prefs-wrapper textarea {
+      width: 100%;
+      min-height: 180px;
+      padding: 1rem 1.2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      color: #1f1e1b;
+      background: rgba(255, 255, 245, 0.5);
+      border: 1px solid rgba(160, 150, 135, 0.2);
+      border-radius: 24px;
+      resize: vertical;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(2px);
+      outline: none;
+    }
+
+    .prefs-wrapper textarea:focus {
+      border-color: #c67a5c;
+      background: rgba(255, 255, 245, 0.8);
+      box-shadow: 0 0 0 4px rgba(198, 122, 92, 0.08);
+    }
+
+    .prefs-wrapper textarea::placeholder {
+      color: #b3aa9b;
+      font-weight: 300;
+    }
+
+    .prefs-wrapper .submit-row {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.2rem;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .btn-submit {
+      background: #c67a5c;
+      border: none;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      font-size: 0.95rem;
+      padding: 0.6rem 2.2rem;
+      border-radius: 60px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px -6px rgba(198, 122, 92, 0.3);
+      letter-spacing: 0.01em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .btn-submit:hover {
+      background: #b05a3a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -8px rgba(198, 122, 92, 0.4);
+    }
+
+    .btn-submit:active {
+      transform: scale(0.97);
+    }
+
+    .btn-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .msg-status {
+      margin-top: 1rem;
+      padding: 0.75rem 1.2rem;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 400;
+      display: none;
+    }
+
+    .msg-status.success {
+      display: block;
+      background: #d4ddd0;
+      color: #2d4030;
+      border: 1px solid #b0c4aa;
+    }
+
+    .msg-status.error {
+      display: block;
+      background: #f0deda;
+      color: #8a3f32;
+      border: 1px solid #dbb8b0;
+    }
+
+    .msg-status.info {
+      display: block;
+      background: #e8e1d6;
+      color: #4d4640;
+      border: 1px solid #d6cec0;
+    }
+
+    /* ——— общее ——— */
     @media (max-width: 768px) {
       body { padding: 0.8rem; }
       .card { padding: 1.5rem 1.2rem 1.2rem; border-radius: 32px; }
       .invite-name { font-size: 2.6rem; }
       .invite-message { max-width: 100%; padding-left: 1rem; }
       .guest-grid { grid-template-columns: 1fr 1fr; }
-      .menu-grid { grid-template-columns: 1fr 1fr; }
       .tabs { gap: 0.3rem; }
       .tab-btn { padding: 0.3rem 1rem; font-size: 0.8rem; }
       .corner-decor { display: none; }
+      .prefs-wrapper textarea { min-height: 140px; }
     }
     @media (max-width: 480px) {
       .guest-grid { grid-template-columns: 1fr; }
-      .menu-grid { grid-template-columns: 1fr; }
       .invite-name { font-size: 2rem; }
       .invite-detail { gap: 1rem 2rem; }
       .detail-value { font-size: 1.1rem; }
     }
 
-    /* ——— общие анимации ——— */
     @keyframes fadeInText {
       0% { opacity: 0; transform: translateY(12px); }
       100% { opacity: 1; transform: translateY(0); }
     }
     @keyframes guestAppear {
       0% { opacity: 0; transform: scale(0.92) translateY(10px); }
-      100% { opacity: 1; transform: scale(1) translateY(0); }
-    }
-    @keyframes menuAppear {
-      0% { opacity: 0; transform: scale(0.94) translateY(12px); }
       100% { opacity: 1; transform: scale(1) translateY(0); }
     }
 
@@ -539,7 +565,6 @@
       background: #b05a3a;
     }
 
-    /* таймер */
     .timer {
       display: inline-flex;
       align-items: center;
@@ -565,7 +590,6 @@
       margin-right: 0.2rem;
     }
 
-    /* tooltip */
     .guest-item .tooltip {
       display: none;
       position: absolute;
@@ -588,7 +612,6 @@
       opacity: 1;
     }
 
-    /* машина */
     .car-info {
       display: inline-flex;
       align-items: center;
@@ -626,7 +649,7 @@
   <div class="tabs">
     <button class="tab-btn active" data-page="invite">Приглашение</button>
     <button class="tab-btn" data-page="guests">Гости</button>
-    <button class="tab-btn" data-page="menu">Меню</button>
+    <button class="tab-btn" data-page="prefs">Предпочтения</button>
   </div>
 
   <!-- СТРАНИЦА 1: ПРИГЛАШЕНИЕ -->
@@ -695,14 +718,14 @@
     </p>
 
     <div class="guest-grid">
-      <div class="guest-item" style="--i:1"><span class="guest-avatar">Д</span><span class="guest-name">Данил А.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 28.06</span></div>
-      <div class="guest-item" style="--i:2"><span class="guest-avatar">К</span><span class="guest-name">Катя С.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 29.06</span></div>
-      <div class="guest-item" style="--i:3"><span class="guest-avatar">П</span><span class="guest-name">Полина Т.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 27.06</span></div>
-      <div class="guest-item" style="--i:4"><span class="guest-avatar">Л</span><span class="guest-name">Лилия С.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 30.06</span></div>
-      <div class="guest-item" style="--i:5"><span class="guest-avatar">Е</span><span class="guest-name">Елизавета Н.</span><span class="guest-status confirmed">да</span><span class="tooltip">ожидается ответ</span></div>
-      <div class="guest-item" style="--i:6"><span class="guest-avatar">Е</span><span class="guest-name">Екатерина М.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 28.06</span></div>
-      <div class="guest-item" style="--i:7"><span class="guest-avatar">В</span><span class="guest-name">Варвара С.</span><span class="guest-status confirmed">да</span><span class="tooltip">ожидается ответ</span></div>
-      <div class="guest-item" style="--i:8"><span class="guest-avatar">Д</span><span class="guest-name">Дарья М.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 29.06</span></div>
+      <div class="guest-item" style="--i:1"><span class="guest-avatar">А</span><span class="guest-name">Данил А.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 28.06</span></div>
+      <div class="guest-item" style="--i:2"><span class="guest-avatar">Е</span><span class="guest-name">Катя С.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 29.06</span></div>
+      <div class="guest-item" style="--i:3"><span class="guest-avatar">М</span><span class="guest-name">Полина Т.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 27.06</span></div>
+      <div class="guest-item" style="--i:4"><span class="guest-avatar">О</span><span class="guest-name">Лилия С.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 30.06</span></div>
+      <div class="guest-item" style="--i:5"><span class="guest-avatar">Д</span><span class="guest-name">Елизавета Н.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 28.06</span></div>
+      <div class="guest-item" style="--i:6"><span class="guest-avatar">Н</span><span class="guest-name">Екатерина М.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 28.06</span></div>
+      <div class="guest-item" style="--i:7"><span class="guest-avatar">С</span><span class="guest-name">Варвара С.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 29.06</span></div>
+      <div class="guest-item" style="--i:8"><span class="guest-avatar">И</span><span class="guest-name">Дарья М.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 29.06</span></div>
       <div class="guest-item" style="--i:9"><span class="guest-avatar">В</span><span class="guest-name">Владислав Г.</span><span class="guest-status confirmed">да</span><span class="tooltip">подтверждено 27.06</span></div>
     </div>
     <div style="margin-top: 1.5rem; font-size: 0.85rem; color: #b3aa9b; border-top: 1px solid #e6dfd6; padding-top: 1.2rem;">
@@ -710,32 +733,38 @@
     </div>
   </div>
 
-  <!-- СТРАНИЦА 3: МЕНЮ -->
-  <div id="page-menu" class="page">
+  <!-- СТРАНИЦА 3: ПРЕДПОЧТЕНИЯ -->
+  <div id="page-prefs" class="page">
     <h2 style="font-weight: 350; font-size: 1.6rem; letter-spacing: -0.02em; color: #1a1917;">
-      Меню <span style="font-size:0.8rem; font-weight:300; color:#b3aa9b;">· сезонное</span>
+      Ваши предпочтения <span style="font-size:0.8rem; font-weight:300; color:#b3aa9b;">· еда и напитки</span>
     </h2>
     <div style="width: 40px; height: 2px; background: linear-gradient(90deg, #c67a5c, #d6cec0); margin: 0.4rem 0 0.2rem; border-radius: 4px;"></div>
-    <p style="color: #8a8276; font-weight: 300; margin-bottom: 0.5rem;">лёгкие закуски, основные блюда, десерты</p>
+    <p style="color: #8a8276; font-weight: 300; margin-bottom: 1.2rem; font-size:0.9rem;">
+      Расскажите, что вы любите или чего избегаете — мы учтём ваши пожелания.
+    </p>
 
-    <div class="menu-grid">
-      <div class="menu-card" style="--i:1"><span class="menu-emoji">🐟</span><div class="menu-category">закуски</div><div class="menu-title">Татар из лосося</div><div class="menu-desc">авокадо, кунжут, соус понзу</div></div>
-      <div class="menu-card" style="--i:2"><span class="menu-emoji">🍅</span><div class="menu-category">закуски</div><div class="menu-title">Брускетта с томатами</div><div class="menu-desc">базилик, чеснок, оливковое масло</div></div>
-      <div class="menu-card" style="--i:3"><span class="menu-emoji">🍄</span><div class="menu-category">основное</div><div class="menu-title">Ризотто с белыми грибами</div><div class="menu-desc">пармезан, трюфельное масло</div></div>
-      <div class="menu-card" style="--i:4"><span class="menu-emoji">🥩</span><div class="menu-category">основное</div><div class="menu-title">Стейк из говядины</div><div class="menu-desc">томатный соус, розмарин</div></div>
-      <div class="menu-card" style="--i:5"><span class="menu-emoji">🍰</span><div class="menu-category">десерт</div><div class="menu-title">Тирамису</div><div class="menu-desc">классический, с маскарпоне</div></div>
-      <div class="menu-card" style="--i:6"><span class="menu-emoji">🍋</span><div class="menu-category">десерт</div><div class="menu-title">Лимонный тарт</div><div class="menu-desc">меренга, ягоды</div></div>
-      <div class="menu-card" style="--i:7"><span class="menu-emoji">🍹</span><div class="menu-category">напитки</div><div class="menu-title">Лимонад с мятой</div><div class="menu-desc">имбирь, лайм</div></div>
-      <div class="menu-card" style="--i:8"><span class="menu-emoji">🍒</span><div class="menu-category">напитки</div><div class="menu-title">Домашний компот</div><div class="menu-desc">сезонные ягоды</div></div>
-    </div>
-    <div style="margin-top: 1.5rem; font-size: 0.8rem; color: #b3aa9b; border-top: 1px solid #e6dfd6; padding-top: 1.2rem; display: flex; justify-content: space-between; flex-wrap: wrap; gap:0.5rem;">
-      <span>* вегетарианские опции доступны по запросу</span>
-      <span style="color:#c67a5c;">✦  приготовлено с любовью  ✦</span>
+    <div class="prefs-wrapper">
+      <form id="prefsForm" action="#" method="POST">
+        <label for="prefsText" class="form-label">Ваши пожелания по еде и напиткам</label>
+        <textarea 
+          id="prefsText" 
+          name="prefs" 
+          placeholder="Например: не ем морепродукты, люблю вегетарианское, предпочитаю чай без сахара, аллергия на орехи… Пишите всё, что считаете важным."
+          required
+        ></textarea>
+        <div class="submit-row">
+          <button type="submit" class="btn-submit" id="submitPrefs">
+            <span>Отправить</span>
+            <span style="font-size:1.1rem;">✧</span>
+          </button>
+        </div>
+        <div id="statusMessage" class="msg-status"></div>
+      </form>
     </div>
   </div>
 
   <div class="footer-note">
-    ✦  4 июля 13:20  ✦  <span class="accent-dot" style="display:inline-block; margin:0 4px;"></span>  ✦
+    ✦  минимализм · 4 июля 13:20  ✦  <span class="accent-dot" style="display:inline-block; margin:0 4px;"></span>  ✦
   </div>
 </div>
 
@@ -746,7 +775,7 @@
     const pages = {
       invite: document.getElementById('page-invite'),
       guests: document.getElementById('page-guests'),
-      menu: document.getElementById('page-menu')
+      prefs: document.getElementById('page-prefs')
     };
 
     function setActivePage(pageId) {
@@ -784,9 +813,9 @@
       particlesContainer.appendChild(p);
     }
 
-    // ——— таймер до 4 июля 13:20 ———
+    // ——— таймер до 4 июля 2026 15:00 ———
     function updateTimer() {
-      const target = new Date(2026, 6, 4, 13, 20, 0).getTime();
+      const target = new Date(2026, 6, 4, 15, 0, 0).getTime();
       const now = new Date().getTime();
       let diff = target - now;
       if (diff < 0) diff = 0;
@@ -821,7 +850,66 @@
       }, 2000);
     }
 
-    
+    // ——— ОТПРАВКА ФОРМЫ В TELEGRAM ———
+    const form = document.getElementById('prefsForm');
+    const textarea = document.getElementById('prefsText');
+    const statusMsg = document.getElementById('statusMessage');
+    const submitBtn = document.getElementById('submitPrefs');
+
+    // ⚠️ ВАЖНО: замените токен и chat_id на свои!
+    const BOT_TOKEN = '8632676356:AAFxPO7RYnm_lN1sqMYY14kf2MkGqQrmX50';
+    const CHAT_ID = '584713791';
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+
+      const text = textarea.value.trim();
+      if (!text) {
+        showStatus('Пожалуйста, напишите ваши пожелания.', 'info');
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = 'Отправка…';
+      showStatus('Отправляем ваши пожелания…', 'info');
+
+      try {
+        const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+        const payload = {
+          chat_id: CHAT_ID,
+          text: `🍽 *Новые предпочтения гостя:*\n\n${text}`,
+          parse_mode: 'Markdown'
+        };
+
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (result.ok) {
+          showStatus('✅ Спасибо! Ваши пожелания успешно отправлены.', 'success');
+          textarea.value = '';
+        } else {
+          console.error('Telegram API error:', result);
+          showStatus('❌ Ошибка при отправке. Попробуйте позже или свяжитесь с организатором.', 'error');
+        }
+      } catch (error) {
+        console.error('Ошибка:', error);
+        showStatus('❌ Не удалось отправить. Проверьте интернет-соединение.', 'error');
+      } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Отправить</span><span style="font-size:1.1rem;">✧</span>';
+      }
+    });
+
+    function showStatus(message, type) {
+      statusMsg.textContent = message;
+      statusMsg.className = 'msg-status ' + type;
+    }
+
   })();
 </script>
 </body>
